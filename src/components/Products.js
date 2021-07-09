@@ -2,7 +2,7 @@ import React from "react";
 import formatCurrency from "../util";
 
 const Products = (props) => {
-  console.log("props :", props.products);
+  console.log("propsher :", props.products);
   const { products } = props;
 
   return (
