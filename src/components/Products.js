@@ -19,7 +19,12 @@ const Products = (props) => {
                 <div className="product-price">
                   <div>{formatCurrency(product.price)}</div>
                 </div>
-                <button className="button primary">Add to Cart</button>
+                <button
+                  onClick={() => props.addToCart(product)}
+                  className="button primary"
+                >
+                  Add to Cart
+                </button>
               </div>
             </li>
           ))}
