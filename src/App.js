@@ -6,17 +6,29 @@ import Cart from "./components/Cart";
 
 function App() {
   const [products, setProducts] = useState();
+
+  const persistedItems = JSON.parse(localStorage.getItem("cartItems"));
+
   const [cartItems, setCartItems] = useState([]);
+
   const [size, setSize] = useState("");
   const [sort, setSort] = useState("");
 
   useEffect(() => {
     setProducts(data.products);
+    if (persistedItems) {
+      setCartItems(persistedItems);
+    }
   }, []);
+
+  const createOrder = (order) => {
+    console.log("ORDER : ", order);
+  };
 
   const removeFromCart = (product) => {
     const remCartItems = cartItems.filter((x) => x._id !== product._id);
     setCartItems(remCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(remCartItems));
   };
 
   const addToCart = (product) => {
@@ -32,6 +44,7 @@ function App() {
       newCartItems.push({ ...product, count: 1 });
     }
     setCartItems(newCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(newCartItems));
   };
 
   const sortProducts = (event) => {
@@ -90,7 +103,11 @@ function App() {
             <Products products={products} addToCart={addToCart} />
           </div>
           <div className="sidebar">
-            <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
+            <Cart
+              cartItems={cartItems}
+              removeFromCart={removeFromCart}
+              createOrder={createOrder}
+            />
           </div>
         </div>
       </main>
