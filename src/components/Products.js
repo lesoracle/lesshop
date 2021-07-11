@@ -17,14 +17,14 @@ const Products = (props) => {
                   <p>{product.title}</p>
                 </a>
                 <div className="product-price">
-                  <div>{product.price && formatCurrency(product.price)}</div>
+                  <div>{formatCurrency(product.price)}</div>
+                  <button
+                    onClick={() => props.addToCart(product)}
+                    className="button primary"
+                  >
+                    Add to Cart
+                  </button>
                 </div>
-                <button
-                  onClick={() => props.addToCart(product)}
-                  className="button primary"
-                >
-                  Add to Cart
-                </button>
               </div>
             </li>
           ))}
