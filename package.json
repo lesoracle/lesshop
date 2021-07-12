@@ -1,5 +1,6 @@
 {
   "name": "lesshop",
+  "proxy": "http://localhost:5000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -42,7 +43,10 @@
     "mongoose": "^5.13.2",
     "nodemon": "^2.0.12",
     "react-modal": "^3.14.3",
+    "react-redux": "^7.2.4",
     "react-reveal": "^1.2.2",
+    "redux": "^4.1.0",
+    "redux-thunk": "^2.3.0",
     "shortid": "^2.2.16"
   }
 }

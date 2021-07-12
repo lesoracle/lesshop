@@ -5,7 +5,7 @@ import Zoom from "react-reveal/Zoom";
 import Modal from "react-modal";
 
 const Products = (props) => {
-  // console.log("propsher :", props.products);
+  console.log("PRODUCT PROPS  :", props.products);
   const { products } = props;
 
   const [product, setProduct] = useState(null);
@@ -21,31 +21,35 @@ const Products = (props) => {
   return (
     <div>
       <Fade bottom cascade>
-        <ul className="products">
-          {products &&
-            products.map((product) => (
-              <li key={product._id}>
-                <div className="product">
-                  <a
-                    href={"#" + product._id}
-                    onClick={() => openModal(product)}
-                  >
-                    <img src={product.image} alt={product.title} />
-                    <p>{product.title}</p>
-                  </a>
-                  <div className="product-price">
-                    <div>{formatCurrency(product.price)}</div>
-                    <button
-                      onClick={() => props.addToCart(product)}
-                      className="button primary"
+        {!products ? (
+          <div>Loading...</div>
+        ) : (
+          <ul className="products">
+            {products &&
+              products.map((product) => (
+                <li key={product._id}>
+                  <div className="product">
+                    <a
+                      href={"#" + product._id}
+                      onClick={() => openModal(product)}
                     >
-                      Add to Cart
-                    </button>
+                      <img src={product.image} alt={product.title} />
+                      <p>{product.title}</p>
+                    </a>
+                    <div className="product-price">
+                      <div>{formatCurrency(product.price)}</div>
+                      <button
+                        onClick={() => props.addToCart(product)}
+                        className="button primary"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
-        </ul>
+                </li>
+              ))}
+          </ul>
+        )}
       </Fade>
       {product && (
         <Modal isOpen={true} ariaHideApp={false} onRequestClose={closeModal}>
