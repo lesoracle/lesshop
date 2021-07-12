@@ -5,7 +5,7 @@ import Zoom from "react-reveal/Zoom";
 import Modal from "react-modal";
 
 const Products = (props) => {
-  console.log("PRODUCT PROPS  :", props.products);
+  // console.log("PRODUCT PROPS  :", props.products);
   const { products } = props;
 
   const [product, setProduct] = useState(null);
