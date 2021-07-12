@@ -4,6 +4,9 @@ import Products from "./components/Products";
 import Filter from "./components/Filter";
 import Cart from "./components/Cart";
 
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "./redux/actions/productActions";
+
 function App() {
   const [products, setProducts] = useState();
 
@@ -14,12 +17,18 @@ function App() {
   const [size, setSize] = useState("");
   const [sort, setSort] = useState("");
 
+  const dispatch = useDispatch();
+
+  const items = useSelector((state) => state.products.items);
+  console.log("ITEMS1 : ", items);
+
   useEffect(() => {
-    setProducts(data.products);
+    dispatch(fetchProducts());
+
     if (persistedItems) {
       setCartItems(persistedItems);
     }
-  }, []);
+  }, [dispatch]);
 
   const createOrder = (order) => {
     console.log("ORDER : ", order);
@@ -100,7 +109,8 @@ function App() {
               filterProducts={filterProducts}
               sortProducts={sortProducts}
             />
-            <Products products={products} addToCart={addToCart} />
+            {/* <Products products={products} addToCart={addToCart} /> */}
+            <Products products={items} addToCart={addToCart} />
           </div>
           <div className="sidebar">
             <Cart
