@@ -10,7 +10,7 @@ const Products = (props) => {
   // console.log("PRODUCT PROPS  :", props.products);
   //const { products } = props;
 
-  const items = useSelector((state) => state.products.items);
+  //const items = useSelector((state) => state.products.items);
   const filtered = useSelector((state) => state.products.filteredItems);
   //console.log("FILTERED  : ", filtered);
 
@@ -25,9 +25,7 @@ const Products = (props) => {
     setProduct(null);
   };
 
-  useEffect(() => {
-    console.log("USE EFFECT :");
-  }, []);
+  useEffect(() => {}, [filtered]);
 
   return (
     <div>
@@ -89,7 +87,7 @@ const Products = (props) => {
                   <button
                     className="button primary"
                     onClick={() => {
-                      props.addToCart(product);
+                      dispatch(addToCart(product));
                       closeModal();
                     }}
                   >
