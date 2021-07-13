@@ -19,7 +19,12 @@ export const productsReducer = (state = {}, action) => {
         filteredItems: action.payload.items,
       };
     case FETCH_PRODUCTS:
-      return { items: action.payload, filteredItems: action.payload };
+      return {
+        size: "",
+        sort: "latest",
+        items: action.payload,
+        filteredItems: action.payload,
+      };
     default:
       return state;
   }

@@ -7,17 +7,24 @@ const Filter = (props) => {
 
   const items = useSelector((state) => state.products.items);
   const filtered = useSelector((state) => state.products.filteredItems);
+  const sort = useSelector((state) => state.products.sort);
+  const size = useSelector((state) => state.products.size);
+
+  //console.log("SORT :", sort);
+  //console.log("SIZE :", size);
 
   return (
     <div className="filter">
-      <div className="filter-result">{props.count} Products</div>
+      <div className="filter-result">
+        {filtered && filtered.length} Products
+      </div>
       <div className="filter-sort">
         Order{" "}
         <select
-          value={props.sort}
+          value={sort}
           onChange={(e) => dispatch(sortProducts(filtered, e.target.value))}
         >
-          <option>Latest</option>
+          <option value="latest">Latest</option>
           <option value="lowest">Lowest</option>
           <option value="highest">Highest</option>
         </select>
@@ -25,7 +32,7 @@ const Filter = (props) => {
       <div className="filter-size">
         Filter{" "}
         <select
-          value={props.size}
+          value={size}
           onChange={(e) => dispatch(filterProducts(items, e.target.value))}
         >
           <option value="">ALL</option>
