@@ -1,14 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import formatCurrency from "../util";
 import Fade from "react-reveal/Fade";
 import Zoom from "react-reveal/Zoom";
 import Modal from "react-modal";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/actions/cartActions";
 
 const Products = (props) => {
   // console.log("PRODUCT PROPS  :", props.products);
-  const { products } = props;
+  //const { products } = props;
+
+  const items = useSelector((state) => state.products.items);
+  const filtered = useSelector((state) => state.products.filteredItems);
+  //console.log("FILTERED  : ", filtered);
 
   const [product, setProduct] = useState(null);
+  const dispatch = useDispatch();
 
   const openModal = (product) => {
     setProduct(product);
@@ -18,15 +25,19 @@ const Products = (props) => {
     setProduct(null);
   };
 
+  useEffect(() => {
+    console.log("USE EFFECT :");
+  }, []);
+
   return (
     <div>
       <Fade bottom cascade>
-        {!products ? (
+        {!filtered ? (
           <div>Loading...</div>
         ) : (
           <ul className="products">
-            {products &&
-              products.map((product) => (
+            {filtered &&
+              filtered.map((product) => (
                 <li key={product._id}>
                   <div className="product">
                     <a
@@ -39,7 +50,7 @@ const Products = (props) => {
                     <div className="product-price">
                       <div>{formatCurrency(product.price)}</div>
                       <button
-                        onClick={() => props.addToCart(product)}
+                        onClick={() => dispatch(addToCart(product))}
                         className="button primary"
                       >
                         Add to Cart
